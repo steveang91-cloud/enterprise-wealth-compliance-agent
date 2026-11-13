@@ -23,18 +23,20 @@ st.set_page_config(
 )
 
 # ==============================================================================
-# 2. Safe Secret Resolution (Streamlit Cloud Friendly)
+# 2. Secret & API Key Resolution (Streamlit Cloud Friendly)
 # ==============================================================================
 api_key = ""
 try:
     if "GOOGLE_API_KEY" in st.secrets:
         api_key = st.secrets["GOOGLE_API_KEY"]
 except Exception:
+    # Fallback to local environment variable if secrets.toml is absent
     api_key = os.environ.get("GOOGLE_API_KEY", "")
 
 if api_key:
     os.environ["GOOGLE_API_KEY"] = api_key
 
+# Ensure direct Gemini Developer API access
 os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "FALSE")
 
 DB_FILE = "enterprise.db"
