@@ -30,6 +30,7 @@ try:
     if "GOOGLE_API_KEY" in st.secrets:
         api_key = st.secrets["GOOGLE_API_KEY"]
 except Exception:
+    # Fallback to local environment variable if secrets.toml is absent
     api_key = os.environ.get("GOOGLE_API_KEY", "")
 
 if api_key:
@@ -41,14 +42,15 @@ os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "FALSE")
 DB_FILE = "enterprise.db"
 POLICIES_DIR = "policies"
 
-# Verify API key early
+# Verify API key early to show a clean UI message if missing
 if not os.environ.get("GOOGLE_API_KEY"):
     st.error(
         "⚠️ **GOOGLE_API_KEY is not configured!**\n\n"
         "Please go to your Streamlit Cloud dashboard: **App Settings** -> **Secrets**, "
-        "and add:\n```toml\nGOOGLE_API_KEY = "your_actual_gemini_api_key"\n```"
+        "and add:\n```toml\nGOOGLE_API_KEY = \"your_actual_gemini_api_key\"\n```"
     )
     st.stop()
+
 
 # Initialize Session Cost Telemetry in State
 if "input_tokens" not in st.session_state:
