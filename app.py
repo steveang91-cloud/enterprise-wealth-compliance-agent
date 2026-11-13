@@ -114,9 +114,7 @@ def get_live_ddl() -> str:
     cur.execute("SELECT sql FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';")
     statements = [row[0] for row in cur.fetchall() if row[0]]
     conn.close()
-    return "
-
-".join(statements)
+    return "".join(statements)
 
 ensure_database()
 
