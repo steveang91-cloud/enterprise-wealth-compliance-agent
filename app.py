@@ -281,13 +281,6 @@ with st.sidebar:
     st.markdown("**AI-Powered Wealth & Compliance Management (ADK)**")
     st.markdown("--- ")
 
-    # Session Cost Telemetry Display Widget
-    st.subheader("📊 Session Cost & Token Spend")
-    st.metric("Accumulated Run Cost (USD)", f"${st.session_state.total_cost_usd:.6f}")
-    st.text(f"Prompt Tokens: {st.session_state.input_tokens}")
-    st.text(f"Completion Tokens: {st.session_state.output_tokens}")
-    st.markdown("--- ")
-
     st.subheader("⚡ Live Database Evolution (MCP Demo)")
     st.caption("Simulate live data structure upgrades seamlessly:")
     col1, col2 = st.columns(2)
