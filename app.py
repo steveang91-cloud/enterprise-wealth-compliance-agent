@@ -42,16 +42,12 @@ os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "FALSE")
 DB_FILE = "enterprise.db"
 POLICIES_DIR = "policies"
 
+# Verify API key early to show a clean UI message if missing
 if not os.environ.get("GOOGLE_API_KEY"):
     st.error(
-        "⚠️ **GOOGLE_API_KEY is not configured!**
-
-"
-        "Please go to your Streamlit Cloud Dashboard: **App Settings** -> **Secrets**, "
-        "and add:
-```toml
-GOOGLE_API_KEY = "your_gemini_api_key_here"
-```"
+        "⚠️ **GOOGLE_API_KEY is not configured!**\n\n"
+        "Please go to your Streamlit Cloud dashboard: **App Settings** -> **Secrets**, "
+        "and add:\n```toml\nGOOGLE_API_KEY = \"your_actual_gemini_api_key\"\n```"
     )
     st.stop()
 
